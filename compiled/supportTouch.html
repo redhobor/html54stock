@@ -1,0 +1,57 @@
+<!doctype html />
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=GBK" />
+<title>test touch</title></head>
+
+<body>
+
+<h1>test touch</h1>
+
+<p>
+<script>
+var agent=navigator.userAgent.toLowerCase();var scrWidth=screen.width;var scrHeight=screen.height;var elemWidth=document.documentElement.clientWidth;var elemHeight=document.documentElement.clientHeight;var otherBrowser=(agent.indexOf("series60")!=-1)||(agent.indexOf("symbian")!=-1)||(agent.indexOf("windows ce")!=-1)||(agent.indexOf("blackberry")!=-1);var mobileOS=typeof orientation!="undefined"?true:false;var touchOS=("ontouchstart" in document.documentElement)?true:false;var iOS=(navigator.platform.indexOf("iPhone")!=-1)||(navigator.platform.indexOf("iPad")!=-1)?true:false;var android=(agent.indexOf("android")!=-1)||(!iOS&&!otherBrowser&&touchOS&&mobileOS)?true:false;document.write("<p><b>Screen width:</b> "+scrWidth+"px<br /><b>Screen height:</b> "+scrHeight+"px<br /><b>Document element width:</b> "+elemWidth+"px<br /><b>Document element height:</b> "+elemHeight+"px<br /><b>iOS device:</b> "+iOS+"<br /><b>Mobile OS:</b> "+mobileOS+"<br /><b>Touch OS:</b> "+touchOS+"<br /><b>Android device:</b> "+android+"</p><p><b>User agent string:</b> "+navigator.userAgent+"</p><p><b>platform string:</b> "+navigator.platform+"</p>");
+</script>
+</p>
+
+<p>
+('ontouchstart' in window) is 
+<script>
+document.writeln(("ontouchstart" in window));
+</script>
+</p>
+
+<script>
+function testTouchWithCreateEvent(){try{document.createEvent("TouchEvent");return true}catch(a){return false}};
+</script>
+
+
+<p>
+testTouchWithCreateEvent is 
+<script>
+document.writeln(testTouchWithCreateEvent());
+</script>
+</p>
+
+<p style="text-decoration:line-through;color:Red">
+'createTouch' in document is 
+<script>
+document.writeln((typeof TouchEvent!="undefined"));
+</script>
+不可用，在windows下用chrom浏览器也会返回true
+;IE9返回false
+;firefox返回false
+；opera返回false
+</p>
+
+<p>
+(typeof Touch == "object") is 
+<script>
+document.writeln(typeof Touch=="object");
+</script>
+
+
+</p>
+
+</body>
+</html>

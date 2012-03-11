@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=gbk"/>
+  <title>loading</title>
+  <script>
+function loading(a,b){this.canvas=a;if(b){this.radius=b.radius||12;this.circleLineWidth=b.circleLineWidth||4;this.circleColor=b.circleColor||"lightgray";this.moveArcColor=b.moveArcColor||"gray"}else{this.radius=12;this.circelLineWidth=4;this.circleColor="lightgray";this.moveArcColor="gray"}}loading.prototype={show:function(){var a=this.canvas;if(!a.getContext){return}if(a.__loading){return}a.__loading=this;var b=a.getContext("2d");var d=this.radius;var c=this;var e=Math.PI*1.5;var f=Math.PI/6;a.loadingInterval=setInterval(function(){b.clearRect(0,0,a.width,a.height);var h=c.circleLineWidth;var g={x:a.width/2-d,y:a.height/2-d};b.beginPath();b.lineWidth=h;b.strokeStyle=c.circleColor;b.arc(g.x,g.y,d,0,Math.PI*2);b.closePath();b.stroke();b.beginPath();b.strokeStyle=c.moveArcColor;b.arc(g.x,g.y,d,e,e+Math.PI*0.45);b.stroke();e+=f},50)},hide:function(){var a=this.canvas;a.__loading=false;if(a.loadingInterval){window.clearInterval(a.loadingInterval)}var b=a.getContext("2d");if(b){b.clearRect(0,0,a.width,a.height)}}};
+</script>
+  </head>
+  <body>
+    <canvas id="canvas" width="300" height="100" style="border:1px solid #69c">您的浏览器不支持html5哟</canvas>
+    <p>
+    <input type="button" onclick="loadingObj.hide()" value="HideLoading"/>
+    <input type="button" onclick="loadingObj.show()" value="showLoading"/>
+    </p>
+    <script>
+var loadingObj=new loading(document.getElementById("canvas"),{radius:8,circleLineWidth:3});loadingObj.show();
+</script>
+  </body>
+</html>

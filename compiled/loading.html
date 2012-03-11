@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="GBK"/>
+    <title>loading</title>
+    <script>
+function loading(a,b){this.canvas=(typeof a=="String"?document.getElementById(a):a);if(b){this.radius=b.radius||12;this.circleLineWidth=b.circleLineWidth||4;this.circleColor=b.circleColor||"lightgray";this.dotColor=b.dotColor||"gray"}else{this.radius=12;this.circelLineWidth=4;this.circleColor="lightgray";this.dotColor="gray"}}loading.prototype={show:function(){var a=this.canvas;if(!a.getContext){return}if(a.__loading){return}a.__loading=this;var b=a.getContext("2d");var d=this.radius;var e=[{angle:0,radius:1.5},{angle:3/d,radius:2},{angle:7/d,radius:2.5},{angle:12/d,radius:3}];var c=this;a.loadingInterval=setInterval(function(){b.clearRect(0,0,a.width,a.height);var h=c.circleLineWidth;var f={x:a.width/2-d,y:a.height/2-d};b.beginPath();b.lineWidth=h;b.strokeStyle=c.circleColor;b.arc(f.x,f.y,d,0,Math.PI*2);b.closePath();b.stroke();for(var g=0;g<e.length;g++){var j=e[g].currentAngle||e[g].angle;var k={x:f.x-(d)*Math.cos(j),y:f.y-(d)*Math.sin(j)};var l=e[g].radius;b.beginPath();b.fillStyle=c.dotColor;b.arc(k.x,k.y,l,0,Math.PI*2);b.closePath();b.fill();e[g].currentAngle=j+4/d}},50)},hide:function(){var a=this.canvas;a.__loading=false;if(a.loadingInterval){window.clearInterval(a.loadingInterval)}var b=a.getContext("2d");if(b){b.clearRect(0,0,a.width,a.height)}}};
+</script>
+  </head>
+  <body>
+    <canvas id="canvas" width="300" height="100" style="border:1px solid #69c"></canvas>
+    <p>
+    <input type="button" onclick="loadingObj.hide()" value="HideLoading"/>
+    <input type="button" onclick="loadingObj.show()" value="showLoading"/>
+    </p>
+    <script>
+var loadingObj=new loading(document.getElementById("canvas"),{radius:8,circleLineWidth:3});loadingObj.show();
+</script>
+  </body>
+</html>

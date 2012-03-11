@@ -1,0 +1,16 @@
+<!doctype html />
+<html>
+<head>
+    <title>touch</title>
+    <meta http-equiv="content-type" content="text/html;charset=gbk" />
+</head>
+<body>
+    <img src="http://cn.bing.com/az/hprichbg?p=rb%2fForbiddenCity_ZH-CN276990937.jpg"
+        alt="test" ontouchstart="touchStart(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd(event)" />
+    <div id="debug"></div>
+    <div id="debugSpeed"></div>
+    <script>
+function $id(a){return document.getElementById(a)}function setDebugMsg(c,a){var b="debug"+(a?a:"");var d=$id(b);if(!d){d=document.createElement("DIV");d.id=b;document.body.appendChild(d)}d.innerHTML="<p>"+c+"</p>"}function getTarget(a){return a.target||a.srcElement}function getTouchFingers(b){var g=[];var m=new Date();for(var h=0;h<b.touches.length;h++){var l=b.touches[h];function n(e){return{identifier:e.identifier,pageX:e.pageX,pageY:e.pageY,touchTime:m}}var c=n(l);g.push(c)}for(var h=0;h<g.length;h++){var d=g[h];if(h==g.length-1){break}var a=[];for(var k=h+1;k<g.length;k++){var f=g[k];a[f.identifier]={x:f.pageX-d.pageX,y:f.pageY-d.pageY}}g[h].distances=a}return g}function disableBubbleAndPreventDefault(a){if(a.preventDefault){a.preventDefault()}a.cancelBubble=true}function touchStart(a){a=a||window.event;var c=getTarget(a);var b=getTouchFingers(a);c.fingers=b;disableBubbleAndPreventDefault(a)}function touchMove(d){d=d||event;var q=getTarget(d);var k=getTouchFingers(d);var n=q.fingers;var b=(k&&k.length&&n&&n.length);setDebugMsg("continueExec is "+b);if(!b){return}setDebugMsg("fingers.length is "+k.length);for(var l=0;l<k.length;l++){var g=k[l];var h=null;for(var m=0;m<n.length;m++){var f=n[m];if(g.identifier==f.identifier){h=f;break}}setDebugMsg("fingerOld is "+h);if(h){var r=(g.touchTime.getTime()-h.touchTime.getTime())*0.001;var s=g.pageX;var t=h.pageX;var o=(s-t)/r;g.speed=o;setDebugMsg("speed is "+o);var p=h.speed;var a=0;if(p){a=(o-p)/r;g.accelerate=a}setDebugMsg("accelerate is "+a);k[l]=g;function c(j){var u="";for(var e in j){u+=e+"= [x:"+j[e].x+",y:"+j[e].y+"];"}return u}setDebugMsg("finger "+h.identifier+" x'speed is "+o+",accelerate is "+a+" distances "+c(g.distances),"Speed"+h.identifier)}}q.fingers=k;disableBubbleAndPreventDefault(d)}function touchEnd(a){a=a||event;var b=getTarget(a);b.fingers=null;disableBubbleAndPreventDefault(a)}function getTouchEventDesc(b){var c="e.touches.length="+b.touches.length;for(var f in b){c+="e attr "+f+" = "+b[f]+"<br/>"}for(var d=0;d<b.touches.length;d++){var g=b.touches[d];c+=("<br/>&nbsp;&nbsp;touches["+d+"]");for(var a in g){c+="<br/>&nbsp;&nbsp;&nbsp;&nbsp;"+a+"="+g[a]}}return c}document.write("<div>");for(var i in navigator){document.write("<br/>navigator."+i+"="+navigator[i])}document.write("</div>");
+</script>
+</body>
+</html>
