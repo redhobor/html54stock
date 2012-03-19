@@ -119,6 +119,15 @@ blog:http://www.cnblogs.com/yukaizhao/
                 elm['on' + evType] = fn;
             }
         },
+        // removeEvent
+        removeEvent:function(obj,type,fn){
+          if(obj.removeEventListener) obj.removeEventListener(type,fn,false);
+          else if(obj.detachEvent){
+            obj.detachEvent("on"+type,obj[type+fn]);
+            obj[type+fn]=null;
+            obj["e"+type+fn]=null;
+          }
+        },
         getEventTarget: function (e) {
             return e.srcElement || e.target || e.relatedTarget;
         },

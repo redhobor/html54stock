@@ -186,7 +186,7 @@ crossLinesAndTipMgr.prototype._mouseout = function (ev) {
 crossLinesAndTipMgr.prototype.addCrossLinesAndTipEvents = function () {
     var canvas = this.canvas;
     var options = this.options;
-    var canvasPosition = getPageCoord(canvas);
+    
     if (canvas.addCrossLinesAndTipEvents == true) return;
     canvas.addCrossLinesAndTipEvents = true;
 
